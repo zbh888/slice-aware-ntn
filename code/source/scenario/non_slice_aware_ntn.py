@@ -32,12 +32,12 @@ import re
 import _thread
 from typing import Dict, List
 from . import Scenario
-from ..model.non_slice_aware_ntn import User, Ntn, Slice, Theta, Web, Streaming, VoIP
+from ..model.non_slice_aware_ntn import User, Ntn, Slice, Theta, Web, Streaming, VoIP, Bohan
 from ..model.non_slice_aware_ntn import MONGO, SERVER, NRF, PCF, AUSF, AMF, SMF, UPF, NSSF, UDR, UDM, GNB, UE, QOF, POPULATE, CLASSIFIER, TRUNKS, NTNQOF
 
 SLICES = [('1', "110101"), ("1", "110203"), ("1", "112233")]
 DATA_NETWORK = ["internet", "internet2", "internet3"]
-APPLICATIONS = [Web(), Streaming(), VoIP()]
+APPLICATIONS = [Web(), Streaming(), VoIP(), Bohan()]
 
 
 class NonSliceAwareNTN(Scenario):
@@ -70,7 +70,7 @@ class NonSliceAwareNTN(Scenario):
                         },
                         'applications': {'type': 'list', 'required': True, 'minlength': 1, 'maxlength': 3, 'schema': {
                             'type': 'dict', 'schema': {
-                                                 'name': {'type': 'string', 'required': True, 'allowed': ['voip', 'web', 'streaming']},
+                                                 'name': {'type': 'string', 'required': True, 'allowed': ['voip', 'web', 'streaming', 'bohan']},
                                                  'data_rate': {'type': 'integer', 'required': True, 'min': 1, 'max': 1000},
                             }
                         },
@@ -141,6 +141,9 @@ class NonSliceAwareNTN(Scenario):
                         elif application["name"] == "streaming":
                             app = user.attach_application(
                                 Streaming(data_rate=application['data_rate']))
+                        elif application["name"] == "bohan":
+                            app = user.attach_application(
+                                Bohan(data_rate=application['data_rate']))
                         else:
                             app = user.attach_application(
                                 VoIP(data_rate=application['data_rate']))
