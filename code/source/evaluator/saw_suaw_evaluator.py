@@ -226,18 +226,26 @@ class Parser(object):
 
     @classmethod
     def parse_throughput(cls, thpt):
+        if thpt == '-':
+            return 0.0
         return float(thpt) / 1000 / 1000
 
     @classmethod
     def parse_jitter(cls, jitter):
+        if jitter == '-':
+            return 0.0
         return float(jitter)
 
     @classmethod
     def parse_trip_time(cls, tt):
+        if tt == '-':
+            return 0.0
         return float(tt)
 
     @classmethod
     def parse_loss(cls, loss):
+        if loss == '-':
+            return 0.0
         regex = r"([0-9]+)"
         rate = re.findall(regex, loss)[0]
         return float(rate)
