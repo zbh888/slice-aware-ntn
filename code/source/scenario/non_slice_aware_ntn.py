@@ -68,7 +68,7 @@ class NonSliceAwareNTN(Scenario):
                             'sigma': {'type': 'boolean', 'required': True, 'default': False},
                         },
                         },
-                        'applications': {'type': 'list', 'required': True, 'minlength': 1, 'maxlength': 3, 'schema': {
+                        'applications': {'type': 'list', 'required': True, 'minlength': 1, 'maxlength': 4, 'schema': {
                             'type': 'dict', 'schema': {
                                                  'name': {'type': 'string', 'required': True, 'allowed': ['voip', 'web', 'streaming', 'bohan']},
                                                  'data_rate': {'type': 'integer', 'required': True, 'min': 1, 'max': 1000},
